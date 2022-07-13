@@ -1,5 +1,6 @@
 package com.example.spring_jpadata_tutorial.repository;
 
+import com.example.spring_jpadata_tutorial.entity.Guardian;
 import com.example.spring_jpadata_tutorial.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,32 @@ class StudentRepositoryTest {
                 .emailId("victorsg.dev@gmail.com")
                 .firstName("Víctor")
                 .lastName("Sánchez")
-                .guardianName("Juan")
-                .guardianEmail("juanl@gmail.com")
-                .guardianMobile("9999999999")
+                //.guardianName("Juan")
+                //.guardianEmail("juanl@gmail.com")
+                //.guardianMobile("9999999999")
                 .build();
 
         studentRepository.save(student);
+    }
+
+    @Test
+    public void saveStudentWithGuardian() {
+
+        Guardian guardian = Guardian.builder()
+                .email("maria@gmail.com")
+                .name("María")
+                .mobile("9999956324")
+                .build();
+
+        Student student = Student.builder()
+                .firstName("Carlos")
+                .emailId("carlos@gmail.com")
+                .lastName("García")
+                .guardian(guardian)
+                .build();
+
+        studentRepository.save(student);
+
     }
 
     @Test
@@ -34,5 +55,7 @@ class StudentRepositoryTest {
 
         System.out.println("studentList = " + studentList);
     }
+
+
 
 }
